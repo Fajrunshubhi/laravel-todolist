@@ -52,10 +52,20 @@ class TodolistServiceTest extends TestCase
         $this->todolistService->saveTodo("2", "fajrun");
         $todolist = Session::get('todolist');
 
-        var_dump($todolist);
-        var_dump("--------------");
-        var_dump($expected);
+        // var_dump($todolist);
+        // var_dump("--------------");
+        // var_dump($expected);
 
         // self::assertEquals($expected, $this->todolistService->getTodolist());
+    }
+
+    public function testRemoveTodo()
+    {
+        $this->todolistService->saveTodo("1", "jrun");
+        $this->todolistService->saveTodo("2", "fajrun");
+        self::assertEquals(2, sizeof($this->todolistService->getTodolist()));
+
+        $this->todolistService->removeTodo(1);
+        self::assertEquals(1, sizeof($this->todolistService->getTodolist()));
     }
 }
