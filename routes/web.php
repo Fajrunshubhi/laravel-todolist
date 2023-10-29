@@ -20,8 +20,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home']);
 
-Route::get('/todolist', [TodolistController::class, 'todo'])
-    ->middleware([OnlyMemberMiddleware::class]);
+Route::controller(TodolistController::class)->middleware([OnlyMemberMiddleware::class])->group(function () {
+    Route::get('/todolist', 'todo');
+    Route::post('/todolist', 'addTodo');
+    Route::post('/todolist/{id}/delete', 'removeTodo');
+});
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/login', 'login')->middleware([OnlyGuestMiddleware::class]);
