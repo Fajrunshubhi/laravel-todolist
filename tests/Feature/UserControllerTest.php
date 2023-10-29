@@ -19,7 +19,7 @@ class UserControllerTest extends TestCase
         $this->withSession([
             "user" => "fajrun"
         ])->get('/login')
-            ->assertRedirect('/');
+            ->assertRedirect('/todolist');
     }
 
     public function testLoginSuccess()
@@ -36,7 +36,7 @@ class UserControllerTest extends TestCase
         ])->post('/login', [
             "user" => "fajrun",
             "password" => 123
-        ])->assertRedirect("/");
+        ])->assertRedirect("/todolist");
     }
 
     public function testLoginValidationError()
