@@ -9,12 +9,19 @@ class TodolistServiceImpl implements TodolistService
 {
     public function saveTodo(string $id, string $todo): void
     {
-        if (!Session::exists('todoList')) {
+        if (!Session::exists('todolist')) {
             Session::put('todolist', []);
         }
         Session::push('todolist', [
             "id" => $id,
             "todo" => $todo
         ]);
+    }
+
+
+
+    public function getTodolist(): array
+    {
+        return Session::get('todolist', []);
     }
 }

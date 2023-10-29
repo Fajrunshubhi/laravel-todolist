@@ -31,4 +31,31 @@ class TodolistServiceTest extends TestCase
             self::assertEquals('jrun', $value['todo']);
         }
     }
+
+    public function testGetTodolistEmpty()
+    {
+        self::assertEquals([], $this->todolistService->getTodolist());
+    }
+    public function testGetTodolistNotEmpty()
+    {
+        $expected = [
+            [
+                "id" => "1",
+                "todo" => "jrun"
+            ],
+            [
+                "id" => "2",
+                "todo" => "fajrun"
+            ]
+        ];
+        $this->todolistService->saveTodo("1", "jrun");
+        $this->todolistService->saveTodo("2", "fajrun");
+        $todolist = Session::get('todolist');
+
+        var_dump($todolist);
+        var_dump("--------------");
+        var_dump($expected);
+
+        // self::assertEquals($expected, $this->todolistService->getTodolist());
+    }
 }
